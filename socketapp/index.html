@@ -1,0 +1,26 @@
+<html>
+<head>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+// Bootstrapping
+var socket = io();
+socket.emit('load');
+socket.on('load', function (data){ 
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.text = data;
+    document.body.appendChild(script);
+});
+socket.on('reload', function (){
+    console.log("Reloading");
+    setTimeout(function (){
+      location.reload();
+    }, 500);
+});
+
+</script>
+</head>
+<body>
+<h1>Loading</h1>
+</body>
+</html>
